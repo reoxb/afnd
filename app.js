@@ -1,7 +1,9 @@
 // readline para leer el contenido de un archivo por linea
 const fs = require('fs');
 const readline = require('readline');
+const readlineSync = require('readline-sync');
 const path = require('path');
+// creamos el objeto de lectura/escritura rl
 
 const array = [];
 
@@ -30,12 +32,14 @@ function AFND (automata) {
   for (let i = 4; i <= automata.length - 1; i++) {
     funcionTransicion.push(automata[i].split(','));
   } // estado, simbolo, estado
-  // console.log(funcionTransicion);
 
-  const funcionTransicionCompleta = completaFuncionTransicion(estados, alfabeto, funcionTransicion);
-  console.log(funcionTransicionCompleta);
-  // if (estadoInicial != null || undefined) {
-  // }
+  if (estadoInicial != null) {
+    const funcionTransicionCompleta = completaFuncionTransicion(estados, alfabeto, funcionTransicion);
+    console.log(funcionTransicionCompleta);
+    const entrada = leerEntrada();
+    console.log('Entrada User: ' + entrada);
+  }
+  console.log('Finaliza funcion principal....');
 } // fin del AFND
 
 function completaFuncionTransicion (estados, alfabeto, funcionTransicion) {
@@ -59,4 +63,11 @@ function completaFuncionTransicion (estados, alfabeto, funcionTransicion) {
     funcionTrancisionCompleta = [...funcionTrancisionCompleta, ['P', simbolo, 'P']];
   }); // fin forEach alfabeto
   return funcionTrancisionCompleta;
+}
+
+function leerEntrada () {
+  let entrada = '';
+  // capturamos la entrada del usuario sincrono
+  entrada = readlineSync.question('Introduzca una cadena de simbolos...');
+  return entrada;
 }

@@ -13,5 +13,8 @@
     "alfabeto"
   ],
   "author": "Juan Suarez (reoxb)",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "readline-sync": "^1.4.7"
+  }
 }
